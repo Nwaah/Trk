@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:title="Zmień nazwę" android:id="@+id/track_rename"/>
-<item android:title="Usuń" android:id="@+id/track_delete"/>
+    <item
+        android:id="@+id/track_rename"
+        android:title="Edytuj" />
+    <item
+        android:id="@+id/track_delete"
+        android:title="Usuń" />
+    <item
+        android:id="@+id/track_show_on_map"
+        android:title="Pokaż na mapie" />
+    <item
+        android:id="@+id/track_details"
+        android:title="Szczegóły" />
 </menu>

@@ -2,54 +2,52 @@ package nwaah.trk;
 
 import java.util.Date;
 
-/**
- * Created by Nwaah on 2016-05-09.
- */
+
 public class Point {
-    public double x;
-    public double y;
+    public double latitude;
+    public double longitude;
+    public double altitude;
     public String time;
     public int track;
 
-    public Point(double x, double y, String time, int track)
-    {
-        this.x = x;
-        this.y = y;
+    public Point(double latitude, double longitude, double altitude, String time, int track) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.altitude = altitude;
         this.time = time;
         this.track = track;
     }
 
-    public Point(double x, double y, int track)
-    {
-        this(x,y,new Date().toString(),track);
+    public Point(double latitude, double longitude, int track) {
+        this(latitude, longitude, 0, new Date().toString(), track);
     }
 
-    public double getX() {
-        return x;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public double getY() {
-        return y;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getTime() {
         return time;
     }
 
-    public int getTrack() {
-        return track;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
-    }
-
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public int getTrack() {
+        return track;
     }
 
     public void setTrack(int track) {
@@ -58,6 +56,6 @@ public class Point {
 
     @Override
     public String toString() {
-        return "("+x+", "+y+")["+time+"]<"+track+">";
+        return "(" + latitude + ", " + longitude + ")[" + time + "]<" + track + ">";
     }
 }

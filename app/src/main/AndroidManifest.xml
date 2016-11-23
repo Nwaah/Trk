@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="nwaah.trk"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nwaah.trk">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,21 +12,15 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SYNC" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="nwaah.trk.MainActivity"/>
-        </activity>
-        <activity android:name=".AddTrack">
-        </activity>
+        <activity android:name=".AddTrack" />
         <activity
             android:name=".TrackChoose"
             android:label="@string/title_activity_track_choose"
@@ -34,15 +28,20 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="nwaah.trk.MainActivity"/>
+                android:value="nwaah.trk.MainActivity" />
         </activity>
-        <activity android:name=".RenameTrack">
-        </activity>
+        <activity android:name=".EditTrack" />
 
         <service
             android:name=".TrackingService"
             android:enabled="true"
             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ANSWER" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
         </service>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -54,15 +53,22 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key"/>
+            android:value="@string/google_maps_key" />
 
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="nwaah.trk.MainActivity"/>
+                android:value="nwaah.trk.MainActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.SYNC" />
+            </intent-filter>
         </activity>
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".HeightChartActivity" />
+        <activity android:name=".DetailsActivity"></activity>
     </application>
 
 </manifest>

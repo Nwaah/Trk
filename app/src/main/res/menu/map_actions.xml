@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/nawiguj_do"
+        android:id="@+id/map_navigate_to"
+        />
+    <item
+        android:title="@string/poka_wi_cej_tras"
+        android:id="@+id/map_show_more"
+        />
+</menu>

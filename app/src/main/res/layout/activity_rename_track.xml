@@ -12,36 +12,51 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
-    <TextView
-        android:text="Zmień nazwę trasy"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="28sp"/>
-    <EditText
-        android:id="@+id/track_rename_name"
-        android:hint="Nazwa"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:autoText="true"
-        android:focusableInTouchMode="true"
-        android:focusable="true"
-        android:textSize="38sp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end">
-        <Button
-            android:onClick="rename"
-            android:text="OK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <Button
-            android:onClick="cancel"
-            android:text="Anuluj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </LinearLayout>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/edytuj_tras"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="28sp"/>
+            <EditText
+                android:id="@+id/track_rename_name"
+                android:hint="@string/nazwa"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:textSize="38sp"/>
+            <com.larswerkman.holocolorpicker.ColorPicker
+                android:id="@+id/picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
+                <Button
+                    android:onClick="rename"
+                    android:text="@string/ok"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <Button
+                    android:onClick="cancel"
+                    android:text="@string/anuluj"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+            </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

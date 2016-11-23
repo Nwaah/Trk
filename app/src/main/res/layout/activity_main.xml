@@ -37,17 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button4"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"/>
-
-    <Button
-        android:onClick="showSettings"
-        android:text="Ustawienia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button5"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentStart="true" />
 
     <Button
         android:text="testWrite"
@@ -65,6 +55,7 @@
         android:visibility="gone"/>
 
     <Button
+        android:visibility="gone"
         android:text="testReadall"
         android:onClick="testRead2"
         android:layout_width="wrap_content"
@@ -94,6 +85,7 @@
         android:layout_centerHorizontal="true"/>
 
     <TextView
+        android:visibility="gone"
         android:text="nothing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,13 +94,23 @@
         android:layout_centerHorizontal="true"/>
 
     <Button
+        android:onClick="showSettings"
+        android:text="@string/settings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/button3"
+        android:layout_below="@+id/button5"
+        android:layout_centerHorizontal="true" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pokaż na mapie"
         android:id="@+id/button5"
-        android:layout_below="@+id/currentTrackName"
-        android:layout_centerHorizontal="true"
-        android:onClick="showMap"/>
+        android:onClick="showMap"
+        android:layout_below="@+id/currentTrackDetails"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>
