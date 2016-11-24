@@ -24,23 +24,48 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="@string/settings_label_frequency"
+                    android:text="@string/settings_label_frequency_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settings_label_frequency" />
+                    android:id="@+id/settings_label_frequency_minutes" />
 
                 <EditText
                     android:text="0"
                     android:inputType="number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settings_frequency_value"/>
+                    android:id="@+id/settings_frequency_value_minutes"/>
 
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settings_frequency_bar"
+                    android:id="@+id/settings_frequency_bar_minutes"
                     android:max="3600" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="@string/settings_label_frequency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_label_frequency_seconds" />
+
+                <EditText
+                    android:text="0"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_frequency_value_seconds"/>
+
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_frequency_bar_seconds"
+                    android:max="60" />
             </LinearLayout>
 
             <LinearLayout

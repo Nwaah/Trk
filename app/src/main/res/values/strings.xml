@@ -76,4 +76,5 @@
     <string name="rand">Rand</string>
     <string name="nawiguj_do">Nawiguj do</string>
     <string name="poka_wi_cej_tras">Pokaż więcej tras</string>
+    <string name="settings_label_frequency_2">Częstotliwość pomiaru (min)</string>
 </resources>

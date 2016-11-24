@@ -15,9 +15,11 @@ import java.util.Random;
 public class SettingsActivity extends AppCompatActivity {
 
     SharedPreferences preferences;
-    SeekBar freq_bar;
+    SeekBar freq_bar_minutes;
+    SeekBar freq_bar_seconds;
     SeekBar step_bar;
-    EditText freq_val;
+    EditText freq_val_minutes;
+    EditText freq_val_seconds;
     EditText step_val;
 
     @Override
@@ -26,9 +28,11 @@ public class SettingsActivity extends AppCompatActivity {
         preferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
         setContentView(R.layout.activity_settings);
 
-        freq_bar = (SeekBar) findViewById(R.id.settings_frequency_bar);
+        freq_bar_minutes = (SeekBar) findViewById(R.id.settings_frequency_bar_minutes);
+        freq_bar_seconds = (SeekBar) findViewById(R.id.settings_frequency_bar_seconds);
         step_bar = (SeekBar) findViewById(R.id.settings_step_bar);
-        freq_val = (EditText) findViewById(R.id.settings_frequency_value);
+        freq_val_minutes = (EditText) findViewById(R.id.settings_frequency_value_minutes);
+        freq_val_seconds = (EditText) findViewById(R.id.settings_frequency_value_seconds);
         step_val = (EditText) findViewById(R.id.settings_step_value);
     }
 
@@ -36,12 +40,15 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        freq_val.setText(String.valueOf(preferences.getInt(Const.preferences_key_frequency, 30)));
+        freq_val_minutes.setText(String.valueOf(preferences.getInt(Const.preferences_key_frequency, 0)/60));
+        freq_val_seconds.setText(String.valueOf(preferences.getInt(Const.preferences_key_frequency, 30)%61));
         step_val.setText(String.valueOf(preferences.getInt(Const.preferences_key_step, 0)));
-        freq_bar.setProgress(preferences.getInt(Const.preferences_key_frequency, 30));
+        freq_bar_minutes.setProgress(preferences.getInt(Const.preferences_key_frequency, 30)/60);
+        freq_bar_seconds.setProgress(preferences.getInt(Const.preferences_key_frequency, 30)%61);
         step_bar.setProgress(preferences.getInt(Const.preferences_key_step, 0));
 
-        setOnChangedListener(freq_bar, freq_val);
+        setOnChangedListener(freq_bar_minutes, freq_val_minutes);
+        setOnChangedListener(freq_bar_seconds, freq_val_seconds);
         setOnChangedListener(step_bar, step_val);
     }
 
@@ -77,12 +84,13 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void saveSettings(View view) {
-        int setting_freq = Integer.parseInt(freq_val.getText().toString());
+        int setting_freq_minutes = Integer.parseInt(freq_val_minutes.getText().toString());
+        int setting_freq_seconds = Integer.parseInt(freq_val_seconds.getText().toString());
         int setting_step = Integer.parseInt(step_val.getText().toString());
 
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putInt(Const.preferences_key_frequency, setting_freq);
+        editor.putInt(Const.preferences_key_frequency, setting_freq_minutes * 60 + setting_freq_seconds);
         editor.putInt(Const.preferences_key_step, setting_step);
 
         editor.apply();
