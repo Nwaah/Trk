@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Build;
@@ -25,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -41,6 +43,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     colorTrack currentTrack = null;
     MapsActivity self;
     private GoogleMap map;
+    Marker goal_marker = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
         db = new DatabaseHelper(this);
-        currentTrackId = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).getInt(Const.current_track_id, 0);
-
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        currentTrackId = preferences.getInt(Const.current_track_id, 0);
 
         broadcastManager = LocalBroadcastManager.getInstance(this);
         pointAddedReceiver = new BroadcastReceiver() {
@@ -111,6 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             map.setMyLocationEnabled(true);
             setOnLongClickListener();
             setOnTrackClickListener();
+            setMarkerFromPreferences();
             drawAllAndCenter();
         }
 
@@ -163,6 +167,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         centerOnEnd(tracks.get(0));
     }
 
+    private void setMarkerFromPreferences()
+    {
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        float lat = preferences.getFloat(Const.key_goal_lat, Const.key_goal_none);
+        float lng = preferences.getFloat(Const.key_goal_lng, Const.key_goal_none);
+        if(lat != Const.key_goal_none && lng != Const.key_goal_none)
+        {
+            drawMarker(new LatLng(
+                    Double.parseDouble(String.valueOf(lat)),
+                    Double.parseDouble(String.valueOf(lng))
+            ));
+        }
+    }
+
     private void drawTrack(colorTrack track) {
         PolylineOptions options = new PolylineOptions();
         for (Point point : track.track) {
@@ -208,13 +226,38 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     void drawMarker(LatLng position) {
         MarkerOptions options = new MarkerOptions();
-        options.position(position);
+        options.position(position).draggable(false);
 
-        map.addMarker(options);
+        goal_marker = map.addMarker(options);
+        Log.d("Map", "Marker on map added " + position.latitude + "/" + position.longitude);
     }
 
     void navigateTo(LatLng goal) {
-        drawMarker(goal);
+
+        if(goal_marker != null)
+        {
+            goal_marker.setPosition(goal);
+        }
+        else {
+            drawMarker(goal);
+        }
+        setPreferencesNavigationGoal(goal);
+    }
+
+    private void setPreferencesNavigationGoal(LatLng latLng)
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+        editor.putFloat(Const.key_goal_lat, Float.parseFloat(String.valueOf(latLng.latitude)));
+        editor.putFloat(Const.key_goal_lng, Float.parseFloat(String.valueOf(latLng.longitude)));
+        editor.apply();
+    }
+
+    private void resetPreferencesNavigationGoal()
+    {
+        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
+        editor.remove(Const.key_goal_lat);
+        editor.remove(Const.key_goal_lng);
+        editor.apply();
     }
 
     private void showActionsDialog(LatLng position) {

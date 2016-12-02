@@ -13,6 +13,11 @@ public abstract class Const {
     public final static String key_latitude = "latitude";
     public final static String key_altitude = "altitude";
     public final static String key_mode = "mode";
+    public final static String key_goal_lat = "goal_lat";
+    public final static String key_goal_lng = "goal_lng";
+    public final static float key_goal_none = 999;
+
+
 
     public final static String intent_filter_action_ping_service = Intent.ACTION_ANSWER;
     public final static String intent_filter_action_order_button_change = Intent.ACTION_CALL_BUTTON;
