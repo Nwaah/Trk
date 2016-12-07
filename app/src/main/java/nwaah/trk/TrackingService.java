@@ -179,8 +179,8 @@ public class TrackingService extends Service {
     private void updateSettings() {
         SharedPreferences preferences = getSharedPreferences(getString(R.string.app_name),
                 MODE_PRIVATE);
-        frequency = preferences.getInt(Const.preferences_key_frequency, 30);
+        frequency = preferences.getInt(Const.preferences_key_setting_frequency, 30);
         currentTrackId = preferences.getInt(Const.current_track_id, 0);
-        minStep = preferences.getInt(Const.preferences_key_step, 0);
+        minStep = preferences.getInt(Const.preferences_key_setting_step, 0);
     }
 }

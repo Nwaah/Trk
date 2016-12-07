@@ -3,8 +3,10 @@ package nwaah.trk;
 import android.content.Intent;
 
 public abstract class Const {
-    public final static String preferences_key_frequency = "Frequency";
-    public final static String preferences_key_step = "Step";
+    public final static String preferences_key_setting_frequency = "Frequency";
+    public final static String preferences_key_setting_step = "Step";
+    public final static String preferences_key_setting_draw_circles = "draw_circles";
+
     public final static String current_track_id = "CurrentTrackId";
     public final static String current_track_name = "CurrentTrackName";
 
@@ -15,6 +17,7 @@ public abstract class Const {
     public final static String key_mode = "mode";
     public final static String key_goal_lat = "goal_lat";
     public final static String key_goal_lng = "goal_lng";
+
     public final static float key_goal_none = 999;
 
 

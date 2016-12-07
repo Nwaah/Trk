@@ -184,10 +184,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void drawTrack(colorTrack track) {
         PolylineOptions options = new PolylineOptions();
         for (Point point : track.track) {
-            options.add(new LatLng(point.getLatitude(), point.getLongitude()));
+            LatLng location = new LatLng(point.getLatitude(), point.getLongitude());
+            options.add(location);
+            if(getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).getBoolean(Const.preferences_key_setting_draw_circles, false))
+                drawCircle(location, track.color);
         }
         options.color(track.color);
         map.addPolyline(options);
+
         Log.d("Map", "Track " + track.id + " drawn");
     }
 

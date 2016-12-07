@@ -7,6 +7,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 
@@ -21,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
     EditText freq_val_minutes;
     EditText freq_val_seconds;
     EditText step_val;
+    CheckBox draw_circles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +36,20 @@ public class SettingsActivity extends AppCompatActivity {
         freq_val_minutes = (EditText) findViewById(R.id.settings_frequency_value_minutes);
         freq_val_seconds = (EditText) findViewById(R.id.settings_frequency_value_seconds);
         step_val = (EditText) findViewById(R.id.settings_step_value);
+        draw_circles =  (CheckBox) findViewById(R.id.settings_draw_circles);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
 
-        freq_val_minutes.setText(String.valueOf(preferences.getInt(Const.preferences_key_frequency, 0)/60));
-        freq_val_seconds.setText(String.valueOf(preferences.getInt(Const.preferences_key_frequency, 30)%61));
-        step_val.setText(String.valueOf(preferences.getInt(Const.preferences_key_step, 0)));
-        freq_bar_minutes.setProgress(preferences.getInt(Const.preferences_key_frequency, 30)/60);
-        freq_bar_seconds.setProgress(preferences.getInt(Const.preferences_key_frequency, 30)%61);
-        step_bar.setProgress(preferences.getInt(Const.preferences_key_step, 0));
+        freq_val_minutes.setText(String.valueOf(preferences.getInt(Const.preferences_key_setting_frequency, 0)/60));
+        freq_val_seconds.setText(String.valueOf(preferences.getInt(Const.preferences_key_setting_frequency, 30)%61));
+        step_val.setText(String.valueOf(preferences.getInt(Const.preferences_key_setting_step, 0)));
+        freq_bar_minutes.setProgress(preferences.getInt(Const.preferences_key_setting_frequency, 30)/60);
+        freq_bar_seconds.setProgress(preferences.getInt(Const.preferences_key_setting_frequency, 30)%61);
+        step_bar.setProgress(preferences.getInt(Const.preferences_key_setting_step, 0));
+        draw_circles.setChecked(preferences.getBoolean(Const.preferences_key_setting_draw_circles, false));
 
         setOnChangedListener(freq_bar_minutes, freq_val_minutes);
         setOnChangedListener(freq_bar_seconds, freq_val_seconds);
@@ -90,8 +94,10 @@ public class SettingsActivity extends AppCompatActivity {
 
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putInt(Const.preferences_key_frequency, setting_freq_minutes * 60 + setting_freq_seconds);
-        editor.putInt(Const.preferences_key_step, setting_step);
+        editor.putInt(Const.preferences_key_setting_frequency, setting_freq_minutes * 60 + setting_freq_seconds);
+        editor.putInt(Const.preferences_key_setting_step, setting_step);
+
+        editor.putBoolean(Const.preferences_key_setting_draw_circles, draw_circles.isChecked());
 
         editor.apply();
         preferences = null;
