@@ -141,6 +141,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(KEY_LONGITUDE, point.getLongitude());
         values.put(KEY_TIME, point.getTime());
         values.put(KEY_TRACK, point.getTrack());
+        values.put(KEY_ALTITUDE, point.altitude);
 
         long id = db.insert(TABLE_POINT, null, values);
 
