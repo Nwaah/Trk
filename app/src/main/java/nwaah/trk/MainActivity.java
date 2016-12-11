@@ -78,6 +78,14 @@ public class MainActivity extends AppCompatActivity {
 
         setCurrentTrackName(currentTrackName);
         setDetails(currentTrackId);
+        if(preferences.contains(Const.key_goal_lat) && preferences.contains(Const.key_goal_lng))
+        {
+            float goal_lat = preferences.getFloat(Const.key_goal_lat, Const.key_goal_none);
+            float goal_lng = preferences.getFloat(Const.key_goal_lng, Const.key_goal_none);
+            if(goal_lat != Const.key_goal_none && goal_lng != Const.key_goal_none)
+                setNavigationInfo(currentTrackId, goal_lat, goal_lng);
+        }
+        else {TextView view = (TextView)findViewById(R.id.navigation); view.setText("");}
 
         Log.d("Main", "Track name displayed");
         Log.d("Main", "Track details displayed");
@@ -87,6 +95,15 @@ public class MainActivity extends AppCompatActivity {
         Log.d("Main", "OnResume completed");
 
         resetServiceButton();
+    }
+
+    private void setNavigationInfo(int currentTrackId, float goal_lat, float goal_lng) {
+        TextView navInfo = (TextView) findViewById(R.id.navigation);
+        float dist = db.getDistanceToGoal(currentTrackId, goal_lat, goal_lng);
+        String info = "";
+        if(dist > getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).getLong(Const.preferences_key_setting_navigation_complete_proximity, 50))
+            info = "Do celu: " + db.formatDistance(dist);
+        navInfo.setText(info);
     }
 
     @Override

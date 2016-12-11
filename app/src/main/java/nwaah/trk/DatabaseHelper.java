@@ -2,6 +2,7 @@ package nwaah.trk;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,7 +10,9 @@ import android.location.Location;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by Nwaah on 2016-05-09.
@@ -295,11 +298,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     "\nCzas trwania: " +
                     formatTime(getTrackTime(track)) +
                     "\nDługość trasy: " +
-                    getTrackLength(track);
+                    formatDistance(getTrackLength(track));
             track.close();
             Log.d("Database", "getTrackDetails(" + trackId + ")");
             return txt;
         }
+    }
+
+    public String formatDistance(double trackLength) {
+        long meters = (long)trackLength;
+        long km = meters/1000;
+        meters %= 1000;
+
+        String res = "";
+        if(km > 0)
+            res += km + "km, ";
+        res += meters + "m";
+        return res;
     }
 
     public String formatTime(long trackTime) {
@@ -309,14 +324,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         trackTime -= minutes * 1000 * 60;
         long seconds = trackTime / 1000;
 
-        return hours + "h, " + minutes + "min, " + seconds + "s";
+        String result = "";
+        if(hours > 0)
+            result += hours + "h, ";
+        if(minutes > 0 || hours > 0)
+            result += minutes + "min, ";
+        result += seconds + "s ";
+        return result;
     }
 
     public String formatDate(long date) {
-        Date a = new Date(date);
-        return a.getDay() + "-"
-                + a.getMonth() + "-"
-                + a.getYear();
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTimeInMillis(date);
+
+        return calendar.get(Calendar.YEAR) + "-"
+                + calendar.get(Calendar.MONTH) + "-"
+                + calendar.get(Calendar.DAY_OF_MONTH);
     }
 
     public double getTrackLength(int trackid) {
@@ -449,6 +472,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
 
         return name;
+    }
+
+    public float getDistanceToGoal(int trackId, float goalLat, float goalLng)
+    {
+        Cursor c = getPointsWithCursor(trackId);
+        if(c.getCount()<1)
+            return 0;
+        c.moveToLast();
+        float[] results = new float[1];
+        Location.distanceBetween(c.getDouble(c.getColumnIndex(KEY_LATITUDE)), c.getDouble(c.getColumnIndex(KEY_LONGITUDE)), goalLat, goalLng, results);
+        return results[0];
     }
 
     public String getTrackExtendedDetails(int currentTrackId) {
