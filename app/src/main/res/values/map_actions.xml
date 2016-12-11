@@ -2,6 +2,7 @@
 <resources>
     <array name="actions">
         <item>Nawiguj do</item>
+        <item>Anuluj nawigację</item>
         <item>Pokaż więcej</item>
     </array>
 </resources>

@@ -262,10 +262,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         editor.remove(Const.key_goal_lat);
         editor.remove(Const.key_goal_lng);
         editor.apply();
+
+        goal_marker.remove();
     }
 
     private void showActionsDialog(LatLng position) {
-        new MapDialogBuilder(self, self, position).getActionsDialog().show();
+        new MapDialogBuilder(self, position).getActionsDialog().show();
     }
 
     private void showTrackList(LatLng position) {
@@ -292,7 +294,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
 
-        new MapDialogBuilder(self, self, position).getTrackListDialog(ids, names, checked).show();
+        new MapDialogBuilder(self, position).getTrackListDialog(ids, names, checked).show();
     }
 
     private boolean existsInList(int trackid) {
@@ -318,7 +320,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         AlertDialog.Builder builder;
         LatLng position;
 
-        MapDialogBuilder(Context context, MapsActivity mapsActivity, LatLng pos) {
+        MapDialogBuilder(Context context, LatLng pos) {
             super(context);
             builder = new AlertDialog.Builder(self);
             position = pos;
@@ -334,6 +336,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             dismiss();
                             break;
                         case 1:
+                            resetPreferencesNavigationGoal();
+                            dismiss();
+                            break;
+                        case 2:
                             dismiss();
                             showTrackList(position);
                             break;

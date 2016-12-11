@@ -8,36 +8,48 @@
     android:orientation="vertical"
     android:gravity="center_horizontal">
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
-        <TextView
-            android:id="@+id/currentTrackName"
-            android:textSize="38sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_toStartOf="@+id/button4"
-            android:layout_toLeftOf="@+id/button4"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:text="Wybierz"
-            android:onClick="chooseTrack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/button4"
-            android:layout_alignTop="@+id/currentTrackName"
-            android:layout_alignRight="@+id/currentTrackDetails"
-            android:layout_alignEnd="@+id/currentTrackDetails"/>
+            <TextView
+                android:id="@+id/currentTrackName"
+                android:textSize="38sp"
+                android:layout_width="wrap_content"
+                android:layout_weight = "80"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill_vertical"/>
+            <Button
+                android:text="Wybierz"
+                android:layout_gravity="right"
+                android:layout_weight="4"
+                android:onClick="chooseTrack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button4" />
+
+        </LinearLayout>
+
+
+
 
     <TextView
         android:id="@+id/currentTrackDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/button4"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+         />
+
+        <TextView
+            android:id="@+id/navigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
     <Button
         android:text="testWrite"
@@ -61,8 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/button2"
-        android:layout_above="@+id/text"
-        android:layout_centerHorizontal="true"/>
+        />
 
     <Button
         android:text="checkDB"
@@ -71,45 +82,45 @@
         android:layout_height="wrap_content"
         android:visibility="gone" />
 
+        <TextView
+        android:visibility="gone"
+        android:text="nothing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text"
+        />
+
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pokaż na mapie"
+        android:id="@+id/button5"
+        android:onClick="showMap"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <Button
+            android:onClick="showSettings"
+            android:text="@string/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/button3"
+            />
+    </LinearLayout>
+
     <ToggleButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New ToggleButton"
         android:id="@+id/toggleButton"
         android:checked="false"
+        android:layout_gravity="center_horizontal"
         android:textOff="Włącz"
         android:textOn="Wyłącz"
         android:onClick="setService"
         android:enabled="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
-        android:visibility="gone"
-        android:text="nothing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/text"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
-
-    <Button
-        android:onClick="showSettings"
-        android:text="@string/settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:id="@+id/button3"
-        android:layout_below="@+id/button5"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pokaż na mapie"
-        android:id="@+id/button5"
-        android:onClick="showMap"
-        android:layout_below="@+id/currentTrackDetails"
         android:layout_centerHorizontal="true" />
 
 
