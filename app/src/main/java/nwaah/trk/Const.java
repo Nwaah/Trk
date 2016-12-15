@@ -4,7 +4,8 @@ import android.content.Intent;
 
 public abstract class Const {
     public final static String preferences_key_setting_frequency = "Frequency";
-    public final static String preferences_key_setting_step = "Step";
+    public final static String preferences_key_setting_min_step = "Min Step";
+    public final static String preferences_key_setting_max_step = "Max Step";
     public final static String preferences_key_setting_draw_circles = "draw_circles";
     public final static String preferences_key_setting_navigation_complete_proximity = "navigation_complete_proximity";
 

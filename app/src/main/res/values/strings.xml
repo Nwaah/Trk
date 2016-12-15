@@ -68,15 +68,16 @@
     <string name="ok">OK</string>
     <string name="anuluj">Anuluj</string>
     <string name="edytuj_tras">Edytuj trasę</string>
-    <string name="settings_label_frequency">Częstotliwość pomiaru (s)</string>
-    <string name="settings_label_step">Minimalna różnica pomiaru (m)</string>
+    <string name="settings_label_frequency">Częstotliwość pomiaru [s]</string>
+    <string name="settings_label_min_step">Minimalna różnica pomiaru [m]</string>
     <string name="clear">Clear</string>
     <string name="settings">Ustawienia</string>
     <string name="error">Error</string>
     <string name="rand">Rand</string>
     <string name="nawiguj_do">Nawiguj do</string>
     <string name="poka_wi_cej_tras">Pokaż więcej tras</string>
-    <string name="settings_label_frequency_2">Częstotliwość pomiaru (min)</string>
+    <string name="settings_label_frequency_2">Częstotliwość pomiaru [min]</string>
     <string name="settings_label_drawcircles">Rysuj punkty</string>
     <string name="heightchart">HeightCHart</string>
+    <string name="settings_label_max_step">Maksymalna różnica pomiaru [m]</string>
 </resources>

@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -115,9 +116,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             setOnLongClickListener();
             setOnTrackClickListener();
             setMarkerFromPreferences();
+            broadcastManager.registerReceiver(pointAddedReceiver, new IntentFilter(Const.intent_filter_action_refresh_views));
+
             drawAllAndCenter();
         }
 
+    }
+
+    @Override
+    protected void onPause() {
+        broadcastManager.unregisterReceiver(pointAddedReceiver);
+        super.onPause();
     }
 
     private void drawAll() {
@@ -132,14 +141,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         ayylmao.track = db.getPoints(trackId);
         ayylmao.color = db.getTrackColor(trackId);
         tracks.add(ayylmao);
+        if(ayylmao.id == currentTrackId)
+            currentTrack = ayylmao;
         Log.d("Map", "Track " + ayylmao.id + " added");
     }
 
     private void removeTrack(int trackid) {
-        for (colorTrack track : tracks
-                ) {
+        for (colorTrack track : tracks) {
             if (track.id == trackid)
+            {
                 tracks.remove(track);
+                if(trackid == currentTrackId)
+                    currentTrack = null;
+                break;
+            }
         }
     }
 

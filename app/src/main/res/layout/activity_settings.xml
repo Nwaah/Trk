@@ -74,22 +74,48 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="@string/settings_label_step"
+                    android:text="@string/settings_label_min_step"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settings_label_step" />
+                    android:id="@+id/settings_label_min_step" />
 
                 <EditText
                     android:text="0"
                     android:inputType="number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settings_step_value"/>
+                    android:id="@+id/settings_min_step_value"/>
 
                 <SeekBar
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/settings_step_bar"
+                    android:id="@+id/settings_min_step_bar"
+                    android:max="1000" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="@string/settings_label_max_step"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_label_max_step" />
+
+                <EditText
+                    android:text="0"
+                    android:inputType="number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_max_step_value"/>
+
+                <SeekBar
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/settings_max_step_bar"
                     android:max="1000" />
 
             </LinearLayout>
