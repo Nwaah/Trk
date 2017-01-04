@@ -2,6 +2,7 @@ package nwaah.trk;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 
 import java.util.Random;
 
@@ -25,6 +29,8 @@ public class SettingsActivity extends AppCompatActivity {
     EditText min_step_val;
     EditText max_step_val;
     CheckBox draw_circles;
+    RadioButton providerg;
+    RadioButton providern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +62,14 @@ public class SettingsActivity extends AppCompatActivity {
         min_step_bar.setProgress(preferences.getInt(Const.preferences_key_setting_min_step, 0));
         max_step_bar.setProgress(preferences.getInt(Const.preferences_key_setting_max_step, 0));
         draw_circles.setChecked(preferences.getBoolean(Const.preferences_key_setting_draw_circles, false));
+        providerg = (RadioButton) findViewById(R.id.provider_GPS);
+        providern = (RadioButton) findViewById(R.id.provider_Network);
+        if(preferences.getString(Const.preferences_key_setting_provider, LocationManager.GPS_PROVIDER).equals(LocationManager.GPS_PROVIDER))
+            providerg.setChecked(true);
+        else
+            providern.setChecked(false);
 
-        setOnChangedListener(freq_bar_minutes, freq_val_minutes);
+            setOnChangedListener(freq_bar_minutes, freq_val_minutes);
         setOnChangedListener(freq_bar_seconds, freq_val_seconds);
         setOnChangedListener(min_step_bar, min_step_val);
         setOnChangedListener(max_step_bar, max_step_val);
@@ -107,7 +119,7 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putInt(Const.preferences_key_setting_max_step, setting_max_step);
 
         editor.putBoolean(Const.preferences_key_setting_draw_circles, draw_circles.isChecked());
-
+        editor.putString(Const.preferences_key_setting_provider, providerg.isChecked()?LocationManager.GPS_PROVIDER:LocationManager.NETWORK_PROVIDER);
         editor.apply();
         preferences = null;
 

@@ -8,6 +8,7 @@ public abstract class Const {
     public final static String preferences_key_setting_max_step = "Max Step";
     public final static String preferences_key_setting_draw_circles = "draw_circles";
     public final static String preferences_key_setting_navigation_complete_proximity = "navigation_complete_proximity";
+    public final static String preferences_key_setting_provider = "provider";
 
 
     public final static String current_track_id = "CurrentTrackId";

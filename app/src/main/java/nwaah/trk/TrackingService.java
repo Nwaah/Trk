@@ -28,6 +28,7 @@ public class TrackingService extends Service {
     private BroadcastReceiver pingReceiver;
     private BroadcastReceiver settingsChangedReceiver;
     private LocalBroadcastManager broadcastManager;
+    private String provider;
     public TrackingService() {
     }
 
@@ -111,8 +112,9 @@ public class TrackingService extends Service {
             MainActivity.requestLocationPermissions();
             stopService(new Intent(this, this.getClass()));
         } else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, frequency * 1000, minStep, locationListener);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, frequency * 1000, minStep, locationListener);
+            try
+            {locationManager.removeUpdates(locationListener);} catch(Exception e){e.printStackTrace();}
+            locationManager.requestLocationUpdates(provider, frequency * 1000, minStep, locationListener);
             Log.d("Service", "Location updates requeseted");
         }
     }
@@ -181,6 +183,9 @@ public class TrackingService extends Service {
                 MODE_PRIVATE);
         frequency = preferences.getInt(Const.preferences_key_setting_frequency, 30);
         currentTrackId = preferences.getInt(Const.current_track_id, 0);
-        minStep = preferences.getInt(Const.preferences_key_setting_step, 0);
+        minStep = preferences.getInt(Const.preferences_key_setting_min_step, 0);
+        provider = preferences.getString(Const.preferences_key_setting_provider, LocationManager.GPS_PROVIDER);
+
+        Log.d("Service","Settings taken from preferences");
     }
 }

@@ -48,6 +48,11 @@
         <item>-1</item>
     </string-array>
 
+    <string-array name="providers">
+        <item>GPS</item>
+        <item>Sieć komórkowa / WiFi</item>
+    </string-array>
+
     <string name="pref_title_system_sync_settings">System sync settings</string>
 
     <!-- Example settings for Notifications -->
@@ -80,4 +85,11 @@
     <string name="settings_label_drawcircles">Rysuj punkty</string>
     <string name="heightchart">HeightCHart</string>
     <string name="settings_label_max_step">Maksymalna różnica pomiaru [m]</string>
+    <string name="toggleServiceButtonText_whenOff">Włącz</string>
+    <string name="toggleServiceButtonText_whenOn">Wyłącz</string>
+    <string name="draw_circles_tooltip">Dodatkowo rysuje na mapie wizualizacje punktów</string>
+    <string name="setting_provider_label">Tryb lokalizacji</string>
+    <string name="setting_provider_tooltip">GPS jest dokładniejszy, można wykorzystać sieć komórkową lub WiFi, ale działa to z mniejszą dokładnością</string>
+    <string name="gps">GPS</string>
+    <string name="network">Sieć</string>
 </resources>

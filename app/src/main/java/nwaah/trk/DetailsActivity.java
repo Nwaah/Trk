@@ -59,6 +59,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
+        if (requestedTrackId == currentTrackId)
         localBroadcastManager.unregisterReceiver(pointAddedReceiver);
         super.onPause();
     }
