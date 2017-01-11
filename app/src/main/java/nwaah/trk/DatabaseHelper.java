@@ -255,7 +255,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor c = getPointsWithCursor(trackId);
         String date;
         if (c.getCount() < 1)
-            date = "Brak daty";
+            date = "0";
         else {
             c.moveToFirst();
             date = c.getString(c.getColumnIndex(KEY_TIME));
@@ -267,7 +267,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String getTrackStartDate(Cursor c) {
         String date;
         if (c.getCount() < 1)
-            date = "Brak daty";
+            date = "0";
         else {
             c.moveToFirst();
             date = c.getString(c.getColumnIndex(KEY_TIME));
@@ -295,7 +295,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else {
             Cursor track = getPointsWithCursor(trackId);
             String txt = "Data rozpoczęcia: " +
-                    getTrackStartDate(track) +
+                    formatDate(Long.parseLong(getTrackStartDate(track))) +
                     "\nCzas trwania: " +
                     formatTime(getTrackTime(track)) +
                     "\nDługość trasy: " +
@@ -335,12 +335,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public String formatDate(long date) {
+        if(date == 0)
+            return "Brak daty";
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTimeInMillis(date);
 
+        String monthtxt;
+        int month = calendar.get(Calendar.MONTH)+1;
+        if(month<10)
+            monthtxt = "0"+month;
+        else
+            monthtxt = ""+month;
+
+        String daytxt;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        if(day<10)
+            daytxt= "0"+day;
+        else
+            daytxt=""+day;
+
         return calendar.get(Calendar.YEAR) + "-"
-                + calendar.get(Calendar.MONTH) + "-"
-                + calendar.get(Calendar.DAY_OF_MONTH);
+                + monthtxt + "-"
+                + daytxt;
     }
 
     public double getTrackLength(int trackid) {

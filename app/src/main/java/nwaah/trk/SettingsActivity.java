@@ -67,7 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
         if(preferences.getString(Const.preferences_key_setting_provider, LocationManager.GPS_PROVIDER).equals(LocationManager.GPS_PROVIDER))
             providerg.setChecked(true);
         else
-            providern.setChecked(false);
+            providern.setChecked(true);
 
             setOnChangedListener(freq_bar_minutes, freq_val_minutes);
         setOnChangedListener(freq_bar_seconds, freq_val_seconds);
