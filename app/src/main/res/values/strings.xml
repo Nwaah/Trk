@@ -92,4 +92,6 @@
     <string name="setting_provider_tooltip">GPS jest dokładniejszy, można wykorzystać sieć komórkową lub WiFi, ale działa to z mniejszą dokładnością</string>
     <string name="gps">GPS</string>
     <string name="network">Sieć</string>
+    <string name="label_settings_show_notifications">Wyświetlaj powiadomienie za każdym razem, gdy nowy punkt zostanie zarejestrowany</string>
+    <string name="settings_show_notifications">Pokazuj powiadomienia</string>
 </resources>

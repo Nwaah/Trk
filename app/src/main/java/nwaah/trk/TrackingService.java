@@ -29,6 +29,7 @@ public class TrackingService extends Service {
     private BroadcastReceiver settingsChangedReceiver;
     private LocalBroadcastManager broadcastManager;
     private String provider;
+    private boolean show_notifications;
     public TrackingService() {
     }
 
@@ -68,7 +69,8 @@ public class TrackingService extends Service {
             public void onLocationChanged(Location location) {
                 long id = savePoint(location);
                 if (id > -1) {
-                    Toast.makeText(getApplicationContext(), "Dodano punkt", Toast.LENGTH_SHORT).show();
+                    if(show_notifications)
+                        Toast.makeText(getApplicationContext(), "Dodano punkt", Toast.LENGTH_SHORT).show();
 
                     Intent pointAdded = new Intent(Const.intent_filter_action_refresh_views);
                     pointAdded.putExtra(Const.key_id, id);
@@ -185,6 +187,7 @@ public class TrackingService extends Service {
         currentTrackId = preferences.getInt(Const.current_track_id, 0);
         minStep = preferences.getInt(Const.preferences_key_setting_min_step, 0);
         provider = preferences.getString(Const.preferences_key_setting_provider, LocationManager.GPS_PROVIDER);
+        show_notifications = preferences.getBoolean(Const.preferences_key_setting_show_notifications, true);
 
         Log.d("Service","Settings taken from preferences");
     }

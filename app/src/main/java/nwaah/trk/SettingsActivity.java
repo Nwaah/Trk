@@ -31,6 +31,7 @@ public class SettingsActivity extends AppCompatActivity {
     CheckBox draw_circles;
     RadioButton providerg;
     RadioButton providern;
+    CheckBox show_notifications;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         min_step_val = (EditText) findViewById(R.id.settings_min_step_value);
         max_step_val = (EditText) findViewById(R.id.settings_max_step_value);
         draw_circles =  (CheckBox) findViewById(R.id.settings_draw_circles);
+        show_notifications = (CheckBox) findViewById(R.id.settings_show_notifications);
     }
 
     @Override
@@ -62,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
         min_step_bar.setProgress(preferences.getInt(Const.preferences_key_setting_min_step, 0));
         max_step_bar.setProgress(preferences.getInt(Const.preferences_key_setting_max_step, 0));
         draw_circles.setChecked(preferences.getBoolean(Const.preferences_key_setting_draw_circles, false));
+        show_notifications.setChecked(preferences.getBoolean(Const.preferences_key_setting_show_notifications, true));
         providerg = (RadioButton) findViewById(R.id.provider_GPS);
         providern = (RadioButton) findViewById(R.id.provider_Network);
         if(preferences.getString(Const.preferences_key_setting_provider, LocationManager.GPS_PROVIDER).equals(LocationManager.GPS_PROVIDER))
@@ -119,6 +122,7 @@ public class SettingsActivity extends AppCompatActivity {
         editor.putInt(Const.preferences_key_setting_max_step, setting_max_step);
 
         editor.putBoolean(Const.preferences_key_setting_draw_circles, draw_circles.isChecked());
+        editor.putBoolean(Const.preferences_key_setting_show_notifications, show_notifications.isChecked());
         editor.putString(Const.preferences_key_setting_provider, providerg.isChecked()?LocationManager.GPS_PROVIDER:LocationManager.NETWORK_PROVIDER);
         editor.apply();
         preferences = null;
