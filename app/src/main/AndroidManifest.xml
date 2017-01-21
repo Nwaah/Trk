@@ -15,9 +15,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SYNC" />
-            </intent-filter>
         </activity>
         <activity android:name=".AddTrack" />
         <activity
@@ -35,12 +32,6 @@
             android:name=".TrackingService"
             android:enabled="true"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.ANSWER" />
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
         </service>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -60,14 +51,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="nwaah.trk.MainActivity" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.SYNC" />
-            </intent-filter>
         </activity>
         <activity android:name=".SettingsActivity" />
         <activity android:name=".HeightChartActivity" />
-        <activity android:name=".DetailsActivity"></activity>
+        <activity android:name=".DetailsActivity"/>
     </application>
 
 </manifest>
