@@ -16,11 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/track_name"
-        android:textSize="18sp" />
+        android:textSize="32sp" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/track_details" />
+        android:id="@+id/track_details"
+        android:textSize="24sp"/>
 </LinearLayout>

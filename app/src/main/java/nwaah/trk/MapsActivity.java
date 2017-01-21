@@ -65,7 +65,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getAction().equals(Const.intent_filter_action_refresh_views) && currentTrack != null) {
-                    currentTrack.addPoint(db.getPoint(intent.getIntExtra(Const.key_id, 0)));
+                    currentTrack.addPoint(db.getPoint(intent.getLongExtra(Const.key_id, 0)));
+                    Log.d("Map","Received point added ping, added point to track " + currentTrack.id);
                     drawTrack(currentTrack);
                 }
             }
@@ -170,7 +171,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 new LatLng(
                         points.get(points.size() - 1).getLatitude(),
                         points.get(points.size() - 1).getLongitude()
-                ), map.getMinZoomLevel() + 2
+                ), map.getMaxZoomLevel() - 4
         );
 
         map.animateCamera(update);
