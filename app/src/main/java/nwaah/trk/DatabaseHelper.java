@@ -253,15 +253,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String getTrackStartDate(int trackId) {
         Cursor c = getPointsWithCursor(trackId);
-        String date;
-        if (c.getCount() < 1)
-            date = "0";
-        else {
-            c.moveToFirst();
-            date = c.getString(c.getColumnIndex(KEY_TIME));
-        }
-        c.close();
-        return date;
+        return getTrackStartDate(c);
     }
 
     public String getTrackStartDate(Cursor c) {
@@ -294,16 +286,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return "Brak trasy";
         else {
             Cursor track = getPointsWithCursor(trackId);
-            String txt = "Data rozpoczęcia: " +
-                    formatDate(Long.parseLong(getTrackStartDate(track))) +
-                    "\nCzas trwania: " +
+            String txt =
+                    "Czas trwania: " +
                     formatTime(getTrackTime(track)) +
                     "\nDługość trasy: " +
-                    formatDistance(getTrackLength(track));
+                    formatDistance(getTrackLength(track)) +
+                    "\nPołożenie: " +
+                    getLastPosition(track);
             track.close();
             Log.d("Database", "getTrackDetails(" + trackId + ")");
             return txt;
         }
+    }
+
+    public String getLastPosition(Cursor track) {
+        if (track.getCount()<1)
+            return "Brak danych";
+        track.moveToLast();
+        int longitude = track.getInt(track.getColumnIndex(KEY_LONGITUDE));
+        int latitude = track.getInt(track.getColumnIndex(KEY_LATITUDE));
+        String result = "";
+        if(longitude>=0)
+            result += longitude + "°N";
+        else result += -longitude + "°S";
+        result += " ";
+        if(latitude>=0)
+            result += latitude + "°E";
+        else result += -latitude + "°W";
+        return result;
     }
 
     public String formatDistance(double trackLength) {
@@ -354,9 +364,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else
             daytxt=""+day;
 
+        String hourtxt;
+        int hour = calendar.get(Calendar.HOUR);
+        if(hour<10)
+            hourtxt = "0"+hour;
+        else
+            hourtxt = ""+hour;
+
+        String minutetxt;
+        int minute = calendar.get(Calendar.MINUTE);
+        if(minute<10)
+            minutetxt = "0"+minute;
+        else
+            minutetxt = ""+minute;
+
         return calendar.get(Calendar.YEAR) + "-"
                 + monthtxt + "-"
-                + daytxt;
+                + daytxt + " "
+                + hourtxt + ":" + minutetxt;
     }
 
     public double getTrackLength(int trackid) {
@@ -505,6 +530,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public String getTrackExtendedDetails(int currentTrackId) {
         //TODO implement getTrackExtendedDetails
         //DootDoot
-        return getTrackDetails(currentTrackId);
+        String result = "";
+        Cursor currentTrack = getPointsWithCursor(currentTrackId);
+
+        result += "Data rozpoczęcia: " + formatDate(Long.parseLong(getTrackStartDate(currentTrackId))) +"\n";
+        result += "Przebyta odległość: " + formatDistance(getTrackLength(currentTrack)) +"\n";
+        result += "Czas trwania: " + formatTime(getTrackTime(currentTrackId)) +"\n";
+        result += "Liczba pomiarów: " + currentTrack.getCount() +"\n";
+        result += "Ostatnie położenie: " + getLastPosition(currentTrack) +"\n";
+
+        return result;
     }
 }
