@@ -74,17 +74,11 @@ public class TrackingService extends Service {
 
                     Intent pointAdded = new Intent(Const.intent_filter_action_refresh_views);
                     pointAdded.putExtra(Const.key_id, id);
-                    /*
-                    pointAdded.putExtra(Const.key_longitude, location.getLongitude());
-                    pointAdded.putExtra(Const.key_latitude, location.getLatitude());
-                    pointAdded.putExtra(Const.key_altitude, location.getAltitude());
-
-                    */
                     Log.d("Service", "New point added");
 
                     broadcastManager.sendBroadcast(pointAdded);
                 } else {
-                    Toast.makeText(getApplicationContext(), "Blad zapisu do bazy", Toast.LENGTH_SHORT).show();
+                    Log.d("Service", "Error during adding new point");
                 }
             }
 
@@ -117,7 +111,7 @@ public class TrackingService extends Service {
             try
             {locationManager.removeUpdates(locationListener);} catch(Exception e){e.printStackTrace();}
             locationManager.requestLocationUpdates(provider, frequency * 1000, minStep, locationListener);
-            Log.d("Service", "Location updates requeseted");
+            Log.d("Service", "Location updates requested");
         }
     }
 

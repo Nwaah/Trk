@@ -306,13 +306,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int longitude = track.getInt(track.getColumnIndex(KEY_LONGITUDE));
         int latitude = track.getInt(track.getColumnIndex(KEY_LATITUDE));
         String result = "";
-        if(longitude>=0)
-            result += longitude + "°N";
-        else result += -longitude + "°S";
-        result += " ";
         if(latitude>=0)
-            result += latitude + "°E";
-        else result += -latitude + "°W";
+            result += latitude + "°N";
+        else result += -latitude + "°S";
+        result += " ";
+        if(longitude>=0)
+            result += longitude + "°E";
+        else result += -longitude + "°W";
         return result;
     }
 
