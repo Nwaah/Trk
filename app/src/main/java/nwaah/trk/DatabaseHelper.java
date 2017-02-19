@@ -318,14 +318,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String formatDistance(double trackLength) {
         long meters = (long)trackLength;
-        long km = meters/1000;
-        meters %= 1000;
-
-        String res = "";
-        if(km > 0)
-            res += km + "km, ";
-        res += meters + "m";
-        return res;
+        double km = meters/1000;
+        return ""+ km + " km";
     }
 
     public String formatTime(long trackTime) {
@@ -538,7 +532,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         result += "Czas trwania: " + formatTime(getTrackTime(currentTrackId)) +"\n";
         result += "Liczba pomiarów: " + currentTrack.getCount() +"\n";
         result += "Ostatnie położenie: " + getLastPosition(currentTrack) +"\n";
+        result += "Średnia prędkość: " + getAverageSpeed(currentTrack) + "\n";
 
         return result;
+    }
+
+    private String getAverageSpeed(Cursor currentTrack) {
+        if(currentTrack.getCount() < 2)
+            return "Brak danych";
+        double speed = getTrackLength(currentTrack)/getTrackTime(currentTrack); // result is in m/s
+        speed *= 3.6;
+        return "" + speed + " km/h";
     }
 }
