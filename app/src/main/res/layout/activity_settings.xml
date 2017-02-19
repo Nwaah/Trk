@@ -97,7 +97,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <TextView
                     android:text="@string/settings_label_max_step"
@@ -186,20 +187,22 @@
                     android:text="@string/clear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="clear"/>
+                    android:onClick="clear"
+                    android:visibility="gone"/>
 
                 <Button
                     android:text="@string/rand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:onClick="addRandomPoint"/>
+                    android:onClick="addRandomPoint"
+                    android:visibility="gone"/>
 
                 <Button
                     android:text="@string/ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/settings_save"
-                    android:onClick="saveSettings"/>
+                    android:onClick="saveSettings" />
             </LinearLayout>
 
         </LinearLayout>

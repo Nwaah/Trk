@@ -50,13 +50,13 @@
                 android:orientation="horizontal"
                 android:layout_gravity="end">
                 <Button
-                    android:onClick="save"
-                    android:text="@string/ok"
+                    android:onClick="cancel"
+                    android:text="@string/anuluj"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <Button
-                    android:onClick="cancel"
-                    android:text="@string/anuluj"
+                    android:onClick="save"
+                    android:text="@string/ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

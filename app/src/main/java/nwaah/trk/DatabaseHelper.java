@@ -49,8 +49,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Tag table create statement
     private static final String CREATE_TABLE_TRACK = "CREATE TABLE IF NOT EXISTS " + TABLE_TRACK
             + "(" + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT," + KEY_COLOR + " INTEGER," + KEY_START_DATE + " TEXT " + ")";
-    private ArrayList<Track> tracks;
-
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -318,7 +316,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public String formatDistance(double trackLength) {
         long meters = (long)trackLength;
-        double km = meters/1000;
+        double km = meters /100;
+        km /= 10;
         return ""+ km + " km";
     }
 
@@ -359,7 +358,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             daytxt=""+day;
 
         String hourtxt;
-        int hour = calendar.get(Calendar.HOUR);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
         if(hour<10)
             hourtxt = "0"+hour;
         else
@@ -540,7 +539,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private String getAverageSpeed(Cursor currentTrack) {
         if(currentTrack.getCount() < 2)
             return "Brak danych";
-        double speed = getTrackLength(currentTrack)/getTrackTime(currentTrack); // result is in m/s
+        double speed = getTrackLength(currentTrack)/(getTrackTime(currentTrack)/1000); // result is in m/s
         speed *= 3.6;
         return "" + speed + " km/h";
     }

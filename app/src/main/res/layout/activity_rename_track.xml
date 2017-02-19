@@ -38,20 +38,21 @@
             <com.larswerkman.holocolorpicker.ColorPicker
                 android:id="@+id/picker"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="end">
                 <Button
-                    android:onClick="rename"
-                    android:text="@string/ok"
+                    android:onClick="cancel"
+                    android:text="@string/anuluj"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <Button
-                    android:onClick="cancel"
-                    android:text="@string/anuluj"
+                    android:onClick="rename"
+                    android:text="@string/ok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

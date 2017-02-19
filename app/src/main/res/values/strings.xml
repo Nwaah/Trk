@@ -72,7 +72,7 @@
     <string name="nazwa">Nazwa</string>
     <string name="ok">OK</string>
     <string name="anuluj">Anuluj</string>
-    <string name="edytuj_tras">Edytuj trasę</string>
+    <string name="edytuj_tras">Edycja trasy</string>
     <string name="settings_label_frequency">Częstotliwość pomiaru [s]</string>
     <string name="settings_label_min_step">Minimalna różnica pomiaru [m]</string>
     <string name="clear">Clear</string>
