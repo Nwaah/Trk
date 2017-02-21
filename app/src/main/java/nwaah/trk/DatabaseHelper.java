@@ -541,6 +541,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return "Brak danych";
         double speed = getTrackLength(currentTrack)/(getTrackTime(currentTrack)/1000); // result is in m/s
         speed *= 3.6;
-        return "" + speed + " km/h";
+        String spd = String.valueOf(speed).substring(0, 4);
+        if(spd.charAt(3) == '.')
+            spd = spd.substring(0, 3);
+        return "" + spd + " km/h";
     }
 }
