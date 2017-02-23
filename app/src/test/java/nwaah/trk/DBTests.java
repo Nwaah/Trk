@@ -1,20 +1,31 @@
 package nwaah.trk;
 
+import android.content.Context;
+import android.database.DatabaseErrorHandler;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Mockito.when;
 
+@RunWith(MockitoJUnitRunner.class)
 public class DBTests {
-    @Test
-    public void nothing()
+    @Mock Context context;
+    DatabaseHelper db;
+    @Mock
+    SQLiteDatabase sql;
+
+    @Before
+    public void prepare()
     {
-        Assert.assertTrue(true);
+        db = new DatabaseHelper(context);
     }
 
-    @Test
-    public void fail()
-    {
-        int a =1;
-        Assert.assertTrue(a!=1);
-    }
+
 }
