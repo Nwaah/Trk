@@ -274,12 +274,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void resetPreferencesNavigationGoal()
     {
-        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE).edit();
-        editor.remove(Const.key_goal_lat);
-        editor.remove(Const.key_goal_lng);
+        SharedPreferences prefs = getSharedPreferences(getString(R.string.app_name), MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        if(prefs.contains(Const.key_goal_lat))
+            editor.remove(Const.key_goal_lat);
+        if(prefs.contains(Const.key_goal_lng))
+            editor.remove(Const.key_goal_lng);
         editor.apply();
 
-        goal_marker.remove();
+        if(goal_marker!=null)
+            goal_marker.remove();
     }
 
     private void showActionsDialog(LatLng position) {
